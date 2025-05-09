@@ -1,0 +1,10 @@
+data:
+  path: 'FoodDataFrame.csv'
+  margin: 50
+ql:
+  alpha: 0.1
+  gamma: 0.9
+  epsilon: 0.2
+  episodes: 1000
+ui:
+  default_calories: 500
