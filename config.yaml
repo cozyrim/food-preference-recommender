@@ -1,5 +1,5 @@
 data:
-  path: 'FoodDataFrame.csv'
+  path: 'FoodDataFrame_with_category.csv'
   margin: 50
 ql:
   alpha: 0.1
@@ -8,3 +8,4 @@ ql:
   episodes: 1000
 ui:
   default_calories: 500
+  max_rounds: 3

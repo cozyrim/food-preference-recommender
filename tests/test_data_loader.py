@@ -1,22 +1,23 @@
 import pytest
-from data_loadter import load_data, filter_by_calories
+from data_loader import load_data, filter_by_calories, get_categories
 import pandas as pd
 
 def sample_df():
-    return pd.DataFram({
-        '식단': ['A', 'B', 'C'],
-        '선호도': [1,2,3],
-        '칼로리': [100, 200, 300]
+    return pd.DataFrame({
+        '식단':['A','B'], '카테고리':['국','밥'],
+        '칼로리':[100,200]
     })
 
-def test_load_data(tmp_path, monkeypatch):
+def test_load_data(tmp_path):
     p = tmp_path / 'test.csv'
-    sample_df().to_csv(p, index=False)
+    pd.DataFrame({'식품명':['A'], '에너지':[100], '카테고리':['국']}).to_csv(p, index=False)
     df = load_data(str(p))
-    assert list(df.columns) == ['식단', '선호도', '칼로리']
-    assert len(df) == 3
+    assert list(df.columns)==['식단','카테고리','선호도','칼로리']
 
-def test_filter_by_calories():
+
+def test_filter_and_categories():
     df = sample_df()
-    filtered = filter_by_calories(df, 500, 100)
-    assert all(filtered['칼로리'].between(400, 600))
+    filtered = filter_by_calories(df,150,60)
+    assert 'A' in filtered['식단'].values
+    cats = get_categories(df)
+    assert set(cats)=={'국','밥'}

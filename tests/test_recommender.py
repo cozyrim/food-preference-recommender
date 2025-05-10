@@ -3,9 +3,9 @@ from recommender import recommend_food_qlearning
 
 def test_recommend():
     df = pd.DataFrame({
-        '식단': ['A', 'B', 'C'],
-        '선호도': [10, -5, 0],
-        '칼로리': [100, 200, 300]
+        '식단':['X','Y'], '카테고리':['밥','국'],
+        '선호도':[0,0], '칼로리':[100,200]
     })
-    rec = recommend_food_qlearning(df, episodes=10)
+    fb={'X':'like'}
+    rec = recommend_food_qlearning(df, user_feedback=fb, episodes=10)
     assert rec in df['식단'].values
